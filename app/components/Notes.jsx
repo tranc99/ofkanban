@@ -4,15 +4,15 @@ import uuid from 'uuid';
 const notes = [
   {
     id: uuid.v4(),
-    task: "Learn React"
+    task: 'Learn React'
   },
   {
-    id: "11bbffc8-5891-4b45-b9ea-5c99aadf870f",
-    task: "Do laundry"
+    id: uuid.v4(),
+    task: 'Do laundry'
   },
   {
-    id: "11bbffc8-5891-4b45-b9ea-5c99aadf870e",
-    task: "Rock n roll"
+    id: uuid.v4(),
+    task: 'Rock n roll'
   }
 ];
 
