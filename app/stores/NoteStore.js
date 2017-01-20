@@ -24,7 +24,14 @@ export default class NoteStore {
     });
   }
   update(updateNote) {
-    console.log('update note', updateNote);
+    this.setState({
+      notes: this.notes.map(note => {
+        if(note.id === updateNote.id) {
+          return Object.assign({}, note, updateNote);
+        }
+        return note;
+      })
+    });
   }
   delete(id){
     this.setState({
