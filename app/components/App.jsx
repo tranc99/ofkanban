@@ -2,30 +2,13 @@ import React from 'react';
 import uuid from 'uuid';
 import Notes from './Notes';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+import connect from '../libs/connect';
+import NoteActions from '../actions/NoteActions';
 
-    this.state = {
-      notes: [
-        {
-          id: uuid.v4(),
-          task: 'Learn React'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Do laundry'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Rock n roll'
-        }
-      ]
-    };
-  }
+class App extends React.Component {
 
   render() {
-    const {notes} = this.state;
+    const {notes} = this.props;
 
     return (
       <div>
@@ -43,19 +26,15 @@ export default class App extends React.Component {
   }
 
   addNote = () => {
-    this.setState({
-      notes: this.state.notes.concat([{
-        id: uuid.v4(),
-        task: 'New task'
-      }])
+    this.props.NoteActions.create({
+      id: uuid.v4(),
+      task: 'New task'
     });
   }
 
   deleteNote = (id, e) => {
     e.stopPropagation();
-    this.setState({
-      notes: this.state.notes.filter(note => note.id !== id)
-    });
+    this.props.NoteActions.delete(id);
   }
 
   activateNoteEdit = (id) => {
@@ -83,3 +62,10 @@ export default class App extends React.Component {
   }
 
 }
+
+
+export default connect(({notes}) => ({
+  notes
+}), {
+  NoteActions
+})(App)
